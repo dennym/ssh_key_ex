@@ -1,4 +1,4 @@
-defmodule SshKeyEx do
+defmodule SSHKeyEx do
   @moduledoc """
   Documentation for `SshKeyEx`.
   """

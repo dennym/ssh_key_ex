@@ -1,0 +1,16 @@
+[package]
+name = "ssh_key_nif"
+version = "0.1.0"
+authors = []
+edition = "2021"
+
+[features]
+alloc = []
+
+[lib]
+name = "ssh_key_nif"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.36.1"
+ssh-key = "0.6.7"
