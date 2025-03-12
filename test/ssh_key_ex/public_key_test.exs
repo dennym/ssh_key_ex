@@ -1,6 +1,6 @@
 defmodule SSHKeyEx.PublicKeyTest do
   use ExUnit.Case
-  # doctest SSHKeyEx.PublicKey
+  doctest SSHKeyEx.PublicKey
 
   alias SSHKeyEx.PublicKey
 
@@ -18,6 +18,14 @@ defmodule SSHKeyEx.PublicKeyTest do
 
     assert %{comment: "cup@saucer.com"} = key_information
     assert %{algorithm: "ssh-rsa"} = key_information
+  end
+
+  test "parses dsa public key into PublicKey struct" do
+    certificate = File.read!("test/support/id_dsa.pub")
+    {:ok, key_information} = PublicKey.from_openssh(certificate)
+
+    assert %{comment: "cup@saucer.com"} = key_information
+    assert %{algorithm: "ssh-dss"} = key_information
   end
 
   test "parses ecdsa-sha2-nistp256 public key into PublicKey struct" do
@@ -43,6 +51,4 @@ defmodule SSHKeyEx.PublicKeyTest do
     assert %{comment: "cup@saucer.com"} = key_information
     assert %{algorithm: "ecdsa-sha2-nistp521"} = key_information
   end
-
-  #  `ssh-dss`
 end

@@ -5,7 +5,7 @@ defmodule SSHKeyEx.PublicKey do
 
   use Rustler, otp_app: :ssh_key_ex, crate: "ssh_key_nif"
 
-  defstruct key_data: "", comment: ""
+  defstruct algorithm: "", comment: ""
 
   defp error() do
     :erlang.nif_error(:nif_not_loaded)
@@ -16,10 +16,10 @@ defmodule SSHKeyEx.PublicKey do
 
   ## Examples
 
-      iex> SSHKeyEx.PublicKey.from_openssh(certificate)
-      :world
+      iex> SSHKeyEx.PublicKey.from_openssh("ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFo2ywthlyyvhVgfHpCG41Z1dXkCR5+UzJmRqChEviTe cup@saucer.com\\n")
+      {:ok, %SSHKeyEx.PublicKey{algorithm: "ssh-ed25519", comment: "cup@saucer.com"}}
 
   """
-  @spec from_openssh(binary()) :: term()
-  def from_openssh(key), do: error()
+  @spec from_openssh(binary()) :: {:ok, map()} | {:error, term()}
+  def from_openssh(_key), do: error()
 end

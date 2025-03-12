@@ -1,8 +1,8 @@
-use rustler::{Atom, Env, NifResult, NifStruct, NifUnitEnum, ResourceArc, Term};
+use rustler::{NifStruct, NifUnitEnum};
 use ssh_key::PublicKey;
 
 #[derive(NifStruct)]
-#[module = "Elixir.SSHKeyEx.PublicKey"]
+#[module = "SSHKeyEx.PublicKey"]
 struct PublicKeyNif {
     algorithm: String,
     comment: String,
@@ -10,7 +10,24 @@ struct PublicKeyNif {
 
 #[derive(NifUnitEnum)]
 enum PublicKeyErrorNif {
-    SomeError,
+    AlgorithmUnknown,
+    AlgorithmUnsupported,
+    /// Cryptographic errors.
+    Crypto,
+    /// Cannot perform operation on decrypted private key.
+    Decrypted,
+    /// ECDSA key encoding errors.
+    Ecdsa,
+    /// Encoding errors.
+    Encoding,
+    /// Cannot perform operation on encrypted private key.
+    Encrypted,
+    /// Other format encoding errors.
+    FormatEncoding,
+    /// Namespace invalid.
+    Namespace,
+    /// Public key is incorrect.
+    PublicKey,
 }
 
 #[rustler::nif]
@@ -25,7 +42,7 @@ fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, PublicKeyErrorNif> {
             };
             Ok(public_key_nif)
         }
-        Err(_) => Err(PublicKeyErrorNif::SomeError),
+        Err(_) => Err(PublicKeyErrorNif::PublicKey),
     }
 }
 
