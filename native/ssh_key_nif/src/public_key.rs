@@ -14,23 +14,18 @@ enum PublicKeyErrorNif {
 }
 
 #[rustler::nif]
-fn add(a: i64, b: i64) -> i64 {
-    a + b
-}
-
-#[rustler::nif]
-fn from_openssh(encoded_key: &str) -> NifResult<PublicKeyNif> {
+fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, PublicKeyErrorNif> {
     let public_key = PublicKey::from_openssh(encoded_key);
 
     match public_key {
         Ok(public_key) => {
             let public_key_nif = PublicKeyNif {
-                algorithm: public_key.algorithm().string(),
+                algorithm: public_key.algorithm().as_str().to_string(),
                 comment: public_key.comment().to_string(),
             };
             Ok(public_key_nif)
         }
-        Err(_) => Err(rustler::error::Error::Atom("SomeError")),
+        Err(_) => Err(PublicKeyErrorNif::SomeError),
     }
 }
 

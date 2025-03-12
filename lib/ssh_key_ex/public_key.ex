@@ -1,7 +1,8 @@
-defmodule PublicKey do
-end
-
 defmodule SSHKeyEx.PublicKey do
+  @moduledoc """
+  Documentation for `SSHKeyEx.PublicKey`.
+  """
+
   use Rustler, otp_app: :ssh_key_ex, crate: "ssh_key_nif"
 
   defstruct key_data: "", comment: ""
@@ -10,10 +11,15 @@ defmodule SSHKeyEx.PublicKey do
     :erlang.nif_error(:nif_not_loaded)
   end
 
-  # When your NIF is loaded, it will override this function.
-  @spec add(integer(), integer()) :: integer()
-  def add(a, b), do: error()
+  @doc """
+  Hello world.
 
+  ## Examples
+
+      iex> SSHKeyEx.PublicKey.from_openssh(certificate)
+      :world
+
+  """
   @spec from_openssh(binary()) :: term()
   def from_openssh(key), do: error()
 end
