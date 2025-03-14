@@ -24,3 +24,6 @@ ssh_key_ex-*.tar
 
 # Rust binary artifacts
 /target/
+
+# Shared objects
+/priv/native/*.so
