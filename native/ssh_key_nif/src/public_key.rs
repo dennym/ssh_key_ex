@@ -1,4 +1,4 @@
-use rustler::{NifStruct, NifUnitEnum};
+use rustler::NifStruct;
 use ssh_key::PublicKey;
 
 #[derive(NifStruct)]
@@ -8,30 +8,8 @@ struct PublicKeyNif {
     comment: String,
 }
 
-#[derive(NifUnitEnum)]
-enum PublicKeyErrorNif {
-    AlgorithmUnknown,
-    AlgorithmUnsupported,
-    /// Cryptographic errors.
-    Crypto,
-    /// Cannot perform operation on decrypted private key.
-    Decrypted,
-    /// ECDSA key encoding errors.
-    Ecdsa,
-    /// Encoding errors.
-    Encoding,
-    /// Cannot perform operation on encrypted private key.
-    Encrypted,
-    /// Other format encoding errors.
-    FormatEncoding,
-    /// Namespace invalid.
-    Namespace,
-    /// Public key is incorrect.
-    PublicKey,
-}
-
 #[rustler::nif]
-fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, PublicKeyErrorNif> {
+fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, String> {
     let public_key = PublicKey::from_openssh(encoded_key);
 
     match public_key {
@@ -42,7 +20,7 @@ fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, PublicKeyErrorNif> {
             };
             Ok(public_key_nif)
         }
-        Err(_) => Err(PublicKeyErrorNif::PublicKey),
+        Err(error) => Err(error.to_string()),
     }
 }
 
