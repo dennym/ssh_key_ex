@@ -1,4 +1,4 @@
-# SshKeyEx
+# SshKeyEx [![CI](https://github.com/dennym/ssh_key_ex/actions/workflows/elixir.yml/badge.svg)](https://github.com/dennym/ssh_key_ex/actions/workflows/elixir.yml)[![Hex Version](https://img.shields.io/hexpm/v/ssh_key_ex.svg)](https://hex.pm/packages/ssh_key_ex) [![Hex Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/ssh_key_ex/)
 
 SSHKeyEx is a library for working with SSH keys in Elixir through rust `ssh_key` as nif implementations. Currently it only implements parts of the `PublicKey.from_openssh` functionality to parse out the comment and the used algorithm of the given binary.
 
