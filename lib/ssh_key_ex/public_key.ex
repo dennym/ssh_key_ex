@@ -7,6 +7,8 @@ defmodule SSHKeyEx.PublicKey do
 
   defstruct algorithm: "", comment: ""
 
+  @type t :: %__MODULE__{algorithm: String.t(), comment: String.t()}
+
   defp error() do
     :erlang.nif_error(:nif_not_loaded)
   end
@@ -18,6 +20,6 @@ defmodule SSHKeyEx.PublicKey do
       {:ok, %SSHKeyEx.PublicKey{algorithm: "ssh-ed25519", comment: "cup@saucer.com"}}
 
   """
-  @spec from_openssh(binary()) :: {:ok, map()} | {:error, term()}
+  @spec from_openssh(binary()) :: {:ok, __MODULE__.t()} | {:error, term()}
   def from_openssh(_key), do: error()
 end
