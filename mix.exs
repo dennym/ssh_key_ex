@@ -32,7 +32,7 @@ defmodule SshKeyEx.MixProject do
     [
       files: ["lib", "native", "mix.exs", "README.md", "LICENSE"],
       maintainers: ["Denny Mueller"],
-      licenses: ["Apache"],
+      licenses: ["Apache-2.0"],
       links: %{
         GitHub: "https://github.com/dennym/ssh_key_ex"
       }
@@ -46,7 +46,8 @@ defmodule SshKeyEx.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:rustler, "~> 0.36.1", runtime: false}
+      {:rustler, "~> 0.36.1", runtime: false},
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
 end

@@ -12,8 +12,6 @@ defmodule SSHKeyEx.PublicKey do
   end
 
   @doc """
-  Hello world.
-
   ## Examples
 
       iex> SSHKeyEx.PublicKey.from_openssh("ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFo2ywthlyyvhVgfHpCG41Z1dXkCR5+UzJmRqChEviTe cup@saucer.com\\n")
