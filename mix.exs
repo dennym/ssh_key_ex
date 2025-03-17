@@ -1,14 +1,20 @@
 defmodule SshKeyEx.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :ssh_key_ex,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      description: description(),
+      name: "SSHKeyEx",
+      docs: [main: "readme", extras: ["README.md"]]
     ]
   end
 
@@ -20,6 +26,21 @@ defmodule SshKeyEx.MixProject do
     [
       extra_applications: [:logger]
     ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "native", "mix.exs", "README.md", "LICENSE"],
+      maintainers: ["Denny Mueller"],
+      licenses: ["Apache"],
+      links: %{
+        GitHub: "https://github.com/dennym/ssh_key_ex"
+      }
+    ]
+  end
+
+  defp description do
+    "SSHKeyEx is a library for working with SSH keys in Elixir through rust `ssh_key` as nif implementations"
   end
 
   # Run "mix help deps" to learn about dependencies.

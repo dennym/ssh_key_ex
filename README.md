@@ -1,6 +1,6 @@
 # SshKeyEx
 
-**TODO: Add description**
+SSHKeyEx is a library for working with SSH keys in Elixir through rust `ssh_key` as nif implementations. Currently it only implements parts of the `PublicKey.from_openssh` functionality to parse out the comment and the used algorithm of the given binary.
 
 ## Installation
 
