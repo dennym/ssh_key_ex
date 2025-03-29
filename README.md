@@ -10,7 +10,7 @@ by adding `ssh_key_ex` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ssh_key_ex, "~> 0.1.0"}
+    {:ssh_key_ex, "~> 0.2.0"}
   ]
 end
 ```
