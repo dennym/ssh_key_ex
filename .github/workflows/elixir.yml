@@ -4,6 +4,9 @@
 # documentation.
 
 name: Elixir CI
+env:
+  SHELL: sh
+  RUSTLER_FORCE_BUILD: "true"
 
 on:
   push:
