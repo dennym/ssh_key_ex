@@ -3,17 +3,25 @@ defmodule SSHKeyEx.PublicKey do
   Documentation for `SSHKeyEx.PublicKey`.
   """
 
-  use Rustler, otp_app: :ssh_key_ex, crate: "ssh_key_nif"
+  alias SSHKeyEx.Native
 
   defstruct algorithm: "", comment: ""
 
   @type t :: %__MODULE__{algorithm: String.t(), comment: String.t()}
 
-  defp error() do
-    :erlang.nif_error(:nif_not_loaded)
-  end
-
   @doc """
+  Parses an OpenSSH format public key string into a PublicKey struct.
+
+  The function expects a string in the standard OpenSSH public key format:
+  `<algorithm> <base64-encoded-key> <comment>\\n`
+
+  ## Parameters
+    * `key` - A string containing the OpenSSH format public key
+
+  ## Returns
+    * `{:ok, %PublicKey{}}` - Successfully parsed public key with algorithm and comment
+    * `{:error, term()}` - If the key format is invalid or parsing fails
+
   ## Examples
 
       iex> SSHKeyEx.PublicKey.from_openssh("ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFo2ywthlyyvhVgfHpCG41Z1dXkCR5+UzJmRqChEviTe cup@saucer.com\\n")
@@ -21,5 +29,5 @@ defmodule SSHKeyEx.PublicKey do
 
   """
   @spec from_openssh(binary()) :: {:ok, __MODULE__.t()} | {:error, term()}
-  def from_openssh(_key), do: error()
+  def from_openssh(key), do: Native.pub_from_openssh(key)
 end

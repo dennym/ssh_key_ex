@@ -9,7 +9,7 @@ struct PublicKeyNif {
 }
 
 #[rustler::nif]
-fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, String> {
+fn pub_from_openssh(encoded_key: &str) -> Result<PublicKeyNif, String> {
     let public_key = PublicKey::from_openssh(encoded_key);
 
     match public_key {
@@ -23,5 +23,3 @@ fn from_openssh(encoded_key: &str) -> Result<PublicKeyNif, String> {
         Err(error) => Err(error.to_string()),
     }
 }
-
-rustler::init!("Elixir.SSHKeyEx.PublicKey");
