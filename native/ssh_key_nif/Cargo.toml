@@ -12,6 +12,7 @@ nif_version_2_16 = ["rustler/nif_version_2_16"]
 
 [lib]
 name = "ssh_key_nif"
+path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
