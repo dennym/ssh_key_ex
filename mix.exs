@@ -1,12 +1,10 @@
 defmodule SshKeyEx.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
-
   def project do
     [
       app: :ssh_key_ex,
-      version: @version,
+      version: project_version(),
       elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -20,6 +18,12 @@ defmodule SshKeyEx.MixProject do
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp project_version do
+    "VERSION"
+    |> File.read!()
+    |> String.trim()
+  end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
@@ -46,6 +50,7 @@ defmodule SshKeyEx.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:rustler_precompiled, "~> 0.4"},
       {:rustler, "~> 0.36.1", runtime: false},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
