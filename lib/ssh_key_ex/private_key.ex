@@ -34,7 +34,7 @@ defmodule SSHKeyEx.PrivateKey do
       ...> -----END OPENSSH PRIVATE KEY-----
       ...> \"\"\"
       iex> SSHKeyEx.PrivateKey.from_openssh(key)
-      {:ok, %SSHKeyEx.PrivateKey{algorithm: "ssh-ed25519", comment: "cup@saucer.com"}}
+      {:ok, %SSHKeyEx.PrivateKey{algorithm: "ssh-ed25519", comment: "cup@saucer.com", encrypted: false}}
 
   """
   @spec from_openssh(binary()) :: {:ok, __MODULE__.t()} | {:error, term()}
