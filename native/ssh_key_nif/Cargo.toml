@@ -1,11 +1,14 @@
 [package]
 name = "ssh_key_nif"
-version = "0.1.0"
-authors = []
+version = "0.4.0"
+authors = ["Denny Mueller"]
 edition = "2021"
 
 [features]
 alloc = []
+default = ["nif_version_2_15"]
+nif_version_2_15 = ["rustler/nif_version_2_15"]
+nif_version_2_16 = ["rustler/nif_version_2_16"]
 
 [lib]
 name = "ssh_key_nif"
