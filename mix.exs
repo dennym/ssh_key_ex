@@ -34,7 +34,7 @@ defmodule SshKeyEx.MixProject do
 
   defp package do
     [
-      files: ["lib", "native", "mix.exs", "README.md", "LICENSE"],
+      files: ["lib", "native", "mix.exs", "README.md", "LICENSE", "VERSION"],
       maintainers: ["Denny Mueller"],
       licenses: ["Apache-2.0"],
       links: %{
